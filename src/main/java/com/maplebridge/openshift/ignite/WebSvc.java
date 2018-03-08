@@ -6,9 +6,7 @@ import org.apache.ignite.Ignition;
 import org.apache.ignite.cluster.ClusterNode;
 
 import javax.cache.Cache;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 @Path("/hello")
@@ -38,16 +36,29 @@ public class WebSvc
         @Produces(MediaType.TEXT_PLAIN)
         public String sayPlainTextHello()
         {
-                StringBuffer sb = new StringBuffer();
-                ClusterNode node = ignite.cluster().forLocal().node();
-                System.out.println("Is client node = " + node.isClient() + "; Local node id = " + node.id());
-                for (Cache.Entry<Integer, String> e : cache.localEntries())
-                {
-                        sb.append("key=" + e.getKey()).append(":val=" + e.getValue()).append("\n");
-                        System.out.println("Got Local entries: [key=" + e.getKey() + ", vallll=" + e.getValue() + ']');
-                }
-
-                return sb.toString();
+             ClusterNode node = ignite.cluster().forLocal().node();
+             System.out.println("Is client node = " + node.isClient() + "; Local node id = " + node.id());
+             return getCacheEntries();
         }
+
+        @Path("evict/{id}")
+        @Produces(MediaType.TEXT_PLAIN)
+        public void removeEntry(@PathParam("id") String id)
+        {
+            cache.remove(Integer.parseInt(id));
+        }
+
+        public String getCacheEntries()
+        {
+            StringBuffer sb = new StringBuffer();
+            for (Cache.Entry<Integer, String> e : cache.localEntries())
+            {
+                sb.append("key=" + e.getKey()).append(":val=" + e.getValue()).append("\n");
+                System.out.println("Got Local entries: [key=" + e.getKey() + ", vallll=" + e.getValue() + ']');
+            }
+
+            return sb.toString();
+        }
+
 
 }
