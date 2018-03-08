@@ -4,6 +4,7 @@ import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteCache;
 import org.apache.ignite.Ignition;
 import org.apache.ignite.cluster.ClusterNode;
+import org.apache.ignite.configuration.IgniteConfiguration;
 
 import javax.cache.Cache;
 import javax.ws.rs.*;
@@ -23,8 +24,8 @@ public class WebSvc
                 {
                         //Ignition.setClientMode(true);
                 }
-
-                ignite = Ignition.start("chen-example-ignite.xml");
+                IgniteConfiguration cfg = new IgniteConfiguration();
+                ignite = Ignition.getOrStart(cfg);
                 cache = ignite.getOrCreateCache("myCacheName");
 
                 for (int i = 0; i < 20; i++)
