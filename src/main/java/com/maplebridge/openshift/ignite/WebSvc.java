@@ -9,7 +9,7 @@ import javax.cache.Cache;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-@Path("/hello")
+@Path("/cache")
 public class WebSvc
 {
         Ignite ignite;
