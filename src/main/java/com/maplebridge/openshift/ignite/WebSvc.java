@@ -43,9 +43,10 @@ public class WebSvc
 
         @Path("evict/{id}")
         @Produces(MediaType.TEXT_PLAIN)
-        public void removeEntry(@PathParam("id") String id)
+        public String removeEntry(@PathParam("id") String id)
         {
             cache.remove(Integer.parseInt(id));
+            return "removed entry: " + id;
         }
 
         public String getCacheEntries()
