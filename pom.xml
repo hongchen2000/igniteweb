@@ -7,7 +7,7 @@
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>ignite-web Maven Webapp</name>
-  
+
   <dependencies>
 
     <dependency>
