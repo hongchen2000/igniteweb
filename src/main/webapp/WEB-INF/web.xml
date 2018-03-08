@@ -9,7 +9,7 @@
 
 <servlet>
   <servlet-name>Jersey REST Service</servlet-name>
-  <servlet-class>com.sun.jersery.spi.container.servlet.ServletContainer</servlet-class>
+  <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
 
   <init-param>
     <param-name>com.sun.jersey.config.property.packages</param-name>
